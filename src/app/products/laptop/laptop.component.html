@@ -1,0 +1,75 @@
+<h4 style="color: rgb(0, 30, 94); font-family: cursive;">
+  Laptops
+</h4>
+
+<p style="font-family: cursive">
+  There are total {{ totalLaps() }} availble in stock as on date
+  {{ ldate | date: "MM/dd/yy" }}
+</p>
+<div *ngFor="let lapPart of lapParts">
+  <div class="col s5 m4">
+    <div class="card" style="height: 650px;" [class.clsName]="lapPart.clsVar">
+      <div class="card-image">
+        <img
+          class="lapPartImg"
+          [src]="lapPart.img"
+          height="250"
+          width="400"
+          style="padding: 5px 5px;"
+        />
+        <br />
+        <br />
+        <br />
+        <span class="card-title" style="color: black;font-family: cursive;"
+          >Details</span
+        >
+        <a class="btn-floating halfway-fab waves-effect waves-light red"
+          ><i class="material-icons">add</i></a
+        >
+      </div>
+      <div class="card-content">
+        <p style="color: black; font-family: cursive;">
+          Laptop-ID: {{ lapPart.lap_id }}
+        </p>
+        <p style="color: black; font-family: cursive;">
+          Laptop-Name: {{ lapPart.lap_name }}
+        </p>
+        <p style="color: black; font-family: cursive;">
+          Description: {{ lapPart.description }}
+        </p>
+
+        <p
+          *ngIf="lapPart.inStock > 0"
+          style="color: black; font-family: cursive;"
+        >
+          Last {{ lapPart.inStock }} parts availble in stock
+        </p>
+        <p
+          *ngIf="lapPart.inStock == 0"
+          style="color: red; font-family: cursive;"
+        >
+          <mark> OUT OF STOCK</mark>
+        </p>
+        <p style="color: black; font-family: cursive;">
+          Price: {{ lapPart.price | currency: "INR" }}
+        </p>
+        <br />
+        <div class="row center">
+          <a
+            (click)="upqty(lapPart)"
+            class="btn-floating waves-effect waves-light red"
+            ><i class="material-icons">add</i></a
+          >
+          {{ lapPart.qty }}
+
+          <a
+            (click)="downqty(lapPart)"
+            class="btn-floating waves-effect waves-light red"
+            ><i class="material-icons">remove</i></a
+          >
+          <input [(ngModel)]="lapPart.qty" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<h4 style="color: rgb(0, 30, 94); font-family: cursive;">
+  Mobiles
+</h4>
+
+<!--<ul id="menu">
+  <li><a [routerLink]="['/mobile/vivo']">Vivo</a></li>
+  <li><a [routerLink]="['/mobile/moto']">Moto</a></li>
+  <li><a [routerLink]="['/mobile']">Mobiles</a></li>
+</ul> !-->
+
+<p style="font-family: cursive">
+  There are total {{ totalProducts() }} available as on date
+  {{ cdate | date: "MM/dd/yy" }}
+</p>
+
+<ul>
+  <li *ngFor="let mobPart of mobParts">
+    <!--card start-->
+    <div class="col s5  m4">
+      <div class="card" style="height: 750px;" [class.clsName]="mobPart.clsVar">
+        <div class="card-image">
+          <img
+            class="mobPartImg"
+            [src]="mobPart.img"
+            height="300"
+            width="300"
+          />
+          <br />
+          <br />
+          <br />
+          <span
+            class="card-title "
+            style="color: rgb(0, 30, 94); font-family: cursive;"
+            >Details</span
+          >
+          <a class="btn-floating halfway-fab waves-effect waves-light red"
+            ><i class="material-icons">add</i></a
+          >
+        </div>
+        <div class="card-content">
+          <div>
+            <div class="stl">
+              <p
+                style="color: black; font-family: cursive;"
+                [ngStyle]="{ 'font-size.px': 16 }"
+              >
+                Mob-id: {{ mobPart.id }}
+              </p>
+
+              <p style="color: black; font-family: cursive;">
+                Mob-name: {{ mobPart.name }}
+              </p>
+              <p
+                *ngIf="mobPart.inStock > 0"
+                style="color: black; font-family: cursive;;"
+              >
+                Last {{ mobPart.inStock }} parts availble in stock
+              </p>
+              <p *ngIf="mobPart.inStock == 0" style="color: red;">
+                OUT OF STOCK
+              </p>
+
+              <p style="color: black; font-family: cursive;">
+                Description: {{ mobPart.description }}
+              </p>
+              <p style="color: black; font-family: cursive;">
+                Price: {{ mobPart.Price | currency: "INR" }}
+              </p>
+              <div
+                [ngStyle]="{
+                  display: mobPart.isOnline === true ? 'inline-block' : 'none'
+                }"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Green_sphere.svg/2000px-Green_sphere.svg.png"
+                  width="16"
+                />
+              </div>
+              <br />
+              <div class="row center">
+                <a
+                  (click)="upqty(mobPart)"
+                  class="btn-floating waves-effect waves-light red"
+                  ><i class="material-icons">add</i></a
+                >
+                {{ mobPart.qty }}
+                <a
+                  (click)="downqty(mobPart)"
+                  class="btn-floating waves-effect waves-light red"
+                  ><i class="material-icons">remove</i></a
+                >
+                <input [(ngModel)]="mobPart.qty" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--card end-->
+  </li>
+</ul>
+<script>
+  $(document).ready(function() {
+    $(".collapsible").collapsible();
+  });
+</script>

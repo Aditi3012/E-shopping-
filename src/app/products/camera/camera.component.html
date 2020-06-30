@@ -1,0 +1,81 @@
+<h4 style="color: rgb(0, 30, 94); font-family: cursive;">
+  Camera
+</h4>
+
+<p style="font-family: cursive;">
+  There are total {{ totalCamera() }} availble in stock as on date
+  {{ cdate | date: "MM/dd/yy" }}
+</p>
+<div *ngFor="let camPart of camParts">
+  <div class="col s5 m4">
+    <div class="card" style="height: 750px;" [class.clsName]="camPart.clsVar">
+      <div class="card-image">
+        <img
+          class="camPartImg"
+          [src]="camPart.img"
+          height="300"
+          width="250"
+          style="padding: 5px 5px;"
+        />
+        <br />
+        <br />
+        <br />
+        <span class="card-title" style="color: black; font-family: cursive;"
+          >Details</span
+        >
+        <a
+          (click)="addToCart(camPart)"
+          class="btn-floating halfway-fab waves-effect waves-light red"
+          ><i class="material-icons">add</i></a
+        >
+      </div>
+      <div class="card-content">
+        <p style="color: black; font-family: cursive;">
+          Camera-ID: {{ camPart.id }}
+        </p>
+        <p style="color: black; font-family: cursive;">
+          Camera-Name: {{ camPart.name }}
+        </p>
+        <p style="color: black; font-family: cursive;">
+          Description: {{ camPart.description }}
+        </p>
+        <p
+          *ngIf="camPart.inStock > 0"
+          style="color: black; font-family: cursive;"
+        >
+          Last {{ camPart.inStock }} parts availble in stock
+        </p>
+        <p
+          *ngIf="camPart.inStock == 0"
+          style="color: red; font-family: cursive;"
+        >
+          OUT OF STOCK
+        </p>
+
+        <p style="color: black; font-family: cursive;">
+          Price: {{ camPart.Price | currency: "INR" }}
+        </p>
+        <br />
+        <div class="row center">
+          <a
+            (click)="upqty(camPart)"
+            class="btn-floating waves-effect waves-light red"
+            ><i class="material-icons">add</i></a
+          >
+          {{ camPart.qty }}
+          <a
+            (click)="downqty(camPart)"
+            class="btn-floating waves-effect waves-light red"
+            ><i class="material-icons">remove</i></a
+          >
+          <input [(ngModel)]="camPart.qty" />
+          <div style="height: 50px;">
+            <a class="waves-effect waves-light btn" [routerLink]="['/cart']"
+              >Go to cart</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

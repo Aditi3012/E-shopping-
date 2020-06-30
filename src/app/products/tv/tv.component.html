@@ -1,0 +1,76 @@
+<h4 style="color: rgb(0, 30, 94); font-family: cursive;">
+  TVs
+</h4>
+
+<p style="font-family: cursive">
+  There are total {{ totalTV() }} available in stock as on date
+  {{ tdate | date: "MM/dd/yy" }}
+</p>
+<div class="row">
+  <div *ngFor="let tvPart of tvParts">
+    <div class="col s5 m4">
+      <div class="card" style="height: 600px;" [class.clsName]="tvPart.clsVar">
+        <div class="card-image">
+          <img
+            class="tvPartImg"
+            [src]="tvPart.img"
+            height="200"
+            width="500"
+            style="padding: 5px 5px;"
+          />
+          <br />
+          <br />
+          <br />
+          <span class="card-title" style="color: black; font-family: cursive;"
+            >Details</span
+          >
+          <a class="btn-floating halfway-fab waves-effect waves-light red"
+            ><i class="material-icons">add</i></a
+          >
+        </div>
+        <div class="card-content">
+          <p style="color: black; font-family: cursive;">
+            TV-ID: {{ tvPart.tv_id }}
+          </p>
+          <p style="color: black; font-family: cursive;">
+            TV-Name: {{ tvPart.tv_name }}
+          </p>
+          <p style="color: black; font-family: cursive;">
+            Description: {{ tvPart.tdesc }}
+          </p>
+          <p
+            *ngIf="tvPart.inStock > 0"
+            style="color: black; font-family: cursive;"
+          >
+            Last {{ tvPart.inStock }} parts availble in stock
+          </p>
+          <p
+            *ngIf="tvPart.inStock == 0"
+            style="color: red; font-family: cursive;"
+          >
+            <mark> OUT OF STOCK</mark>
+          </p>
+          <p style="color: black; font-family: cursive;">
+            Price: {{ tvPart.price | currency: "INR" }}
+          </p>
+          <br />
+          <div class="row center">
+            <a
+              (click)="upqty(tvPart)"
+              class="btn-floating waves-effect waves-light red"
+              ><i class="material-icons">add</i></a
+            >
+            {{ tvPart.qty }}
+            <a
+              (click)="downqty(tvPart)"
+              class="btn-floating waves-effect waves-light red"
+              ><i class="material-icons">remove</i></a
+            >
+          </div>
+
+          <input [(ngModel)]="tvPart.qty" style="padding-bottom: 2px;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

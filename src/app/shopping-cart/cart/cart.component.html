@@ -1,0 +1,70 @@
+<h4 style="color: rgb(0, 30, 94); font-family: cursive;">
+  Shopping Cart
+</h4>
+<div class="row">
+  <div *ngFor="let item of items">
+    <div class="col s5 m5">
+      <div class="card" style="height: 600px;" [class.clsName]="item.clsVar">
+        <div class="card-image">
+          <img
+            class="itemImg"
+            [src]="item.img"
+            height="200"
+            width="500"
+            style="padding: 5px 5px;"
+          />
+          <br />
+          <br />
+          <br />
+          <span class="card-title" style="color: black; font-family: cursive;"
+            >Details</span
+          >
+        </div>
+        <div class="card-content">
+          <p style="color: black; font-family: cursive;">
+            product-ID: {{ item.id }}
+          </p>
+          <p style="color: black; font-family: cursive;">
+            Product-Name: {{ item.name }}
+          </p>
+          <p style="color: black; font-family: cursive;">
+            Price: {{ item.Price | currency: "INR" }}
+          </p>
+
+          <p
+            *ngIf="item.inStock > 0"
+            style="color: black; font-family: cursive;"
+          >
+            Last {{ item.inStock }} parts availble in stock
+          </p>
+          <p
+            *ngIf="item.inStock == 0"
+            style="color: red; font-family: cursive;"
+          >
+            <mark> OUT OF STOCK</mark>
+          </p>
+
+          <br />
+          <div class="row center">
+            <a
+              (click)="upqty(item)"
+              class="btn-floating waves-effect waves-light red"
+              ><i class="material-icons">add</i></a
+            >
+            {{ item.qty }}
+            <a
+              (click)="downqty(item)"
+              class="btn-floating waves-effect waves-light red"
+              ><i class="material-icons">remove</i></a
+            >
+          </div>
+
+          <input [(ngModel)]="item.qty" style="padding-bottom: 2px;" />
+          <a class="waves-effect waves-light btn" [routerLink]="['/checkout']"
+            >Checkout</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

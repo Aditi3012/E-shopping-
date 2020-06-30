@@ -1,0 +1,32 @@
+<nav class="white" role="navigation">
+  <div class="nav-wrapper container">
+    <a
+      id="logo-container"
+      href="#"
+      class="brand-logo"
+      style="
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      "
+      >Logo</a
+    >
+    <ul
+      class="right hide-on-med-and-down"
+      style="font-family: fantasy; color: blue;"
+    >
+      <li><a [routerLink]="['/home']">Home</a></li>
+      <li><a [routerLink]="['/mobile']">Mobiles</a></li>
+      <li><a [routerLink]="['/camera']">Camera</a></li>
+      <li><a [routerLink]="['/laptops']">Laptops</a></li>
+      <li><a [routerLink]="['/Tv']">TV</a></li>
+      <li><a [routerLink]="['/login']">Login</a></li>
+      <li><a [routerLink]="['/cart']">Go to cart</a></li>
+    </ul>
+
+    <ul id="nav-mobile" class="sidenav">
+      <li><a href="#">Navbar Link</a></li>
+    </ul>
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+  </div>
+</nav>
